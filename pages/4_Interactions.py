@@ -90,6 +90,7 @@ else:
 with st.expander("Spoiler"):
     st.code("""
 from streamlit_flow import streamlit_flow
+from streamlit_flow.layouts import TreeLayout
 
 streamlit_flow('fully_interactive_flow', 
                 [], 
