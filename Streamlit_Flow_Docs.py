@@ -75,6 +75,7 @@ with col1:
 
     st.markdown("""* `node_type` must be one of `"input"`, `"default"` or `"output"`
 * `source_position` and `target_position` must be one of `"top"`, `"bottom"`, `"left"` or `"right"`
+* `width` and `height` are values that are used for computing the node positions in the layout. They don't change the node visually. If you wish to change node dimension, use the `style` attribute.
 * `style` is a CSS style dictionary. Eg. `{"backgroundColor": "green", "fontWeight": 900}`
 * `**kwargs` can be any other attribute on a React Flow node that you wish to manually set (not recommended).
 """)
