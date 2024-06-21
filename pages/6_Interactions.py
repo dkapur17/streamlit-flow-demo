@@ -14,10 +14,10 @@ st.markdown("### 1. Getting Interaction Element")
 
 st.markdown("We can set the `get_node_on_click` and the `get_edge_on_click` parameters to `True` to get the id of the element that was clicked on.")
 
-nodes = [StreamlitFlowNode(id='1', pos=(100, 100), data={'label': 'Node 1'}, node_type='input', source_position='right', draggable=False),
-        StreamlitFlowNode('2', (275, 50), {'label': 'Node 2'}, 'default', 'right', 'left', draggable=False),
-        StreamlitFlowNode('3', (275, 150), {'label': 'Node 3'}, 'default', 'right', 'left', draggable=False),
-        StreamlitFlowNode('4', (450, 100), {'label': 'Node 4'}, 'output', target_position='left', draggable=False)]
+nodes = [StreamlitFlowNode(id='1', pos=(100, 100), data={'content': 'Node 1'}, node_type='input', source_position='right', draggable=False),
+        StreamlitFlowNode('2', (350, 50), {'content': 'Node 2'}, 'default', 'right', 'left', draggable=False),
+        StreamlitFlowNode('3', (350, 150), {'content': 'Node 3'}, 'default', 'right', 'left', draggable=False),
+        StreamlitFlowNode('4', (600, 100), {'content': 'Node 4'}, 'output', target_position='left', draggable=False)]
 
 edges = [StreamlitFlowEdge('1-2', '1', '2', animated=True),
         StreamlitFlowEdge('1-3', '1', '3', animated=True),
@@ -39,10 +39,10 @@ import streamlit as st
 from streamlit_flow import streamlit_flow
 from streamlit_flow.elements import StreamlitFlowNode, StreamlitFlowEdge
     
-nodes = [StreamlitFlowNode(id='1', pos=(100, 100), data={'label': 'Node 1'}, node_type='input', source_position='right', draggable=False),
-        StreamlitFlowNode('2', (275, 50), {'label': 'Node 2'}, 'default', 'right', 'left', draggable=False),
-        StreamlitFlowNode('3', (275, 150), {'label': 'Node 3'}, 'default', 'right', 'left', draggable=False),
-        StreamlitFlowNode('4', (450, 100), {'label': 'Node 4'}, 'output', target_position='left', draggable=False)]
+nodes = [StreamlitFlowNode(id='1', pos=(100, 100), data={'content': 'Node 1'}, node_type='input', source_position='right', draggable=False),
+        StreamlitFlowNode('2', (275, 50), {'content': 'Node 2'}, 'default', 'right', 'left', draggable=False),
+        StreamlitFlowNode('3', (275, 150), {'content': 'Node 3'}, 'default', 'right', 'left', draggable=False),
+        StreamlitFlowNode('4', (450, 100), {'content': 'Node 4'}, 'output', target_position='left', draggable=False)]
 
 edges = [StreamlitFlowEdge('1-2', '1', '2', animated=True),
         StreamlitFlowEdge('1-3', '1', '3', animated=True),
@@ -68,13 +68,13 @@ Further you get access to all the items in the flow by using the `key` of the co
 Try it yourself!""")
 
 streamlit_flow('fully_interactive_flow', 
-               [], 
-               [],
-               fit_view=True,
-               show_controls=True,
-               allow_new_edges=True,
-               animate_new_edges=True,
-               layout=TreeLayout("right"),
+                [], 
+                [],
+                fit_view=True,
+                show_controls=True,
+                allow_new_edges=True,
+                animate_new_edges=True,
+                layout=TreeLayout("right"),
                 enable_pane_menu=True,
                 enable_edge_menu=True,
                 enable_node_menu=True,

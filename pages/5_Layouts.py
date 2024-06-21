@@ -6,13 +6,13 @@ from streamlit_flow.layouts import *
 
 st.set_page_config(page_title="Layouts - Streamlit Flow", layout="wide")
 
-nodes = [StreamlitFlowNode(id='1', pos=(0, 0), data={'label': 'Node 1'}, node_type='input', source_position='right'),
-        StreamlitFlowNode('2', (0, 0), {'label': 'Node 2'}, 'default', 'right', 'left'),
-        StreamlitFlowNode('3', (0, 0), {'label': 'Node 3'}, 'default', 'right', 'left'),
-        StreamlitFlowNode('4', (0, 0), {'label': 'Node 4'}, 'output', target_position='left'),
-        StreamlitFlowNode('5', (0, 0), {'label': 'Node 5'}, 'output', target_position='left'),
-        StreamlitFlowNode('6', (0, 0), {'label': 'Node 6'}, 'output', target_position='left'),
-        StreamlitFlowNode('7', (0, 0), {'label': 'Node 7'}, 'output', target_position='left'),]
+nodes = [StreamlitFlowNode(id='1', pos=(0, 0), data={'content': 'Node 1'}, node_type='input', source_position='right'),
+        StreamlitFlowNode('2', (0, 0), {'content': 'Node 2'}, 'default', 'right', 'left'),
+        StreamlitFlowNode('3', (0, 0), {'content': 'Node 3'}, 'default', 'right', 'left'),
+        StreamlitFlowNode('4', (0, 0), {'content': 'Node 4'}, 'output', target_position='left'),
+        StreamlitFlowNode('5', (0, 0), {'content': 'Node 5'}, 'output', target_position='left'),
+        StreamlitFlowNode('6', (0, 0), {'content': 'Node 6'}, 'output', target_position='left'),
+        StreamlitFlowNode('7', (0, 0), {'content': 'Node 7'}, 'output', target_position='left'),]
 
 edges = [StreamlitFlowEdge('1-2', '1', '2', animated=True),
         StreamlitFlowEdge('1-3', '1', '3', animated=True),
@@ -41,13 +41,13 @@ from streamlit_flow import streamlit_flow
 from streamlit_flow.elements import StreamlitFlowNode, StreamlitFlowEdge 
 from streamlit_flow.layouts import TreeLayout
         
-nodes = [StreamlitFlowNode(id='1', pos=(0, 0), data={'label': 'Node 1'}, node_type='input', source_position='right'),
-        StreamlitFlowNode('2', (0, 0), {'label': 'Node 2'}, 'default', 'right', 'left'),
-        StreamlitFlowNode('3', (0, 0), {'label': 'Node 3'}, 'default', 'right', 'left'),
-        StreamlitFlowNode('4', (0, 0), {'label': 'Node 4'}, 'output', target_position='left'),
-        StreamlitFlowNode('5', (0, 0), {'label': 'Node 5'}, 'output', target_position='left'),
-        StreamlitFlowNode('6', (0, 0), {'label': 'Node 6'}, 'output', target_position='left'),
-        StreamlitFlowNode('7', (0, 0), {'label': 'Node 7'}, 'output', target_position='left'),]
+nodes = [StreamlitFlowNode(id='1', pos=(0, 0), data={'content': 'Node 1'}, node_type='input', source_position='right'),
+        StreamlitFlowNode('2', (0, 0), {'content': 'Node 2'}, 'default', 'right', 'left'),
+        StreamlitFlowNode('3', (0, 0), {'content': 'Node 3'}, 'default', 'right', 'left'),
+        StreamlitFlowNode('4', (0, 0), {'content': 'Node 4'}, 'output', target_position='left'),
+        StreamlitFlowNode('5', (0, 0), {'content': 'Node 5'}, 'output', target_position='left'),
+        StreamlitFlowNode('6', (0, 0), {'content': 'Node 6'}, 'output', target_position='left'),
+        StreamlitFlowNode('7', (0, 0), {'content': 'Node 7'}, 'output', target_position='left'),]
 
 edges = [StreamlitFlowEdge('1-2', '1', '2', animated=True),
         StreamlitFlowEdge('1-3', '1', '3', animated=True),
@@ -75,13 +75,13 @@ from streamlit_flow import streamlit_flow
 from streamlit_flow.elements import StreamlitFlowNode, StreamlitFlowEdge 
 from streamlit_flow.layouts import LayeredLayout
         
-nodes = [StreamlitFlowNode(id='1', pos=(0, 0), data={'label': 'Node 1'}, node_type='input', source_position='right'),
-        StreamlitFlowNode('2', (0, 0), {'label': 'Node 2'}, 'default', 'right', 'left'),
-        StreamlitFlowNode('3', (0, 0), {'label': 'Node 3'}, 'default', 'right', 'left'),
-        StreamlitFlowNode('4', (0, 0), {'label': 'Node 4'}, 'output', target_position='left'),
-        StreamlitFlowNode('5', (0, 0), {'label': 'Node 5'}, 'output', target_position='left'),
-        StreamlitFlowNode('6', (0, 0), {'label': 'Node 6'}, 'output', target_position='left'),
-        StreamlitFlowNode('7', (0, 0), {'label': 'Node 7'}, 'output', target_position='left'),]
+nodes = [StreamlitFlowNode(id='1', pos=(0, 0), data={'content': 'Node 1'}, node_type='input', source_position='right'),
+        StreamlitFlowNode('2', (0, 0), {'content': 'Node 2'}, 'default', 'right', 'left'),
+        StreamlitFlowNode('3', (0, 0), {'content': 'Node 3'}, 'default', 'right', 'left'),
+        StreamlitFlowNode('4', (0, 0), {'content': 'Node 4'}, 'output', target_position='left'),
+        StreamlitFlowNode('5', (0, 0), {'content': 'Node 5'}, 'output', target_position='left'),
+        StreamlitFlowNode('6', (0, 0), {'content': 'Node 6'}, 'output', target_position='left'),
+        StreamlitFlowNode('7', (0, 0), {'content': 'Node 7'}, 'output', target_position='left'),]
 
 edges = [StreamlitFlowEdge('1-2', '1', '2', animated=True),
         StreamlitFlowEdge('1-3', '1', '3', animated=True),
@@ -110,13 +110,13 @@ from streamlit_flow import streamlit_flow
 from streamlit_flow.elements import StreamlitFlowNode, StreamlitFlowEdge
 from streamlit_flow.layouts import RadialLayout
             
-nodes = [StreamlitFlowNode(id='1', pos=(0, 0), data={'label': 'Node 1'}, node_type='input', source_position='right'),
-        StreamlitFlowNode('2', (0, 0), {'label': 'Node 2'}, 'default', 'right', 'left'),
-        StreamlitFlowNode('3', (0, 0), {'label': 'Node 3'}, 'default', 'right', 'left'),
-        StreamlitFlowNode('4', (0, 0), {'label': 'Node 4'}, 'output', target_position='left'),
-        StreamlitFlowNode('5', (0, 0), {'label': 'Node 5'}, 'output', target_position='left'),
-        StreamlitFlowNode('6', (0, 0), {'label': 'Node 6'}, 'output', target_position='left'),
-        StreamlitFlowNode('7', (0, 0), {'label': 'Node 7'}, 'output', target_position='left'),]
+nodes = [StreamlitFlowNode(id='1', pos=(0, 0), data={'content': 'Node 1'}, node_type='input', source_position='right'),
+        StreamlitFlowNode('2', (0, 0), {'content': 'Node 2'}, 'default', 'right', 'left'),
+        StreamlitFlowNode('3', (0, 0), {'content': 'Node 3'}, 'default', 'right', 'left'),
+        StreamlitFlowNode('4', (0, 0), {'content': 'Node 4'}, 'output', target_position='left'),
+        StreamlitFlowNode('5', (0, 0), {'content': 'Node 5'}, 'output', target_position='left'),
+        StreamlitFlowNode('6', (0, 0), {'content': 'Node 6'}, 'output', target_position='left'),
+        StreamlitFlowNode('7', (0, 0), {'content': 'Node 7'}, 'output', target_position='left'),]
         
 edges = [StreamlitFlowEdge('1-2', '1', '2', animated=True),
         StreamlitFlowEdge('1-3', '1', '3', animated=True),
@@ -145,13 +145,13 @@ from streamlit_flow import streamlit_flow
 from streamlit_flow.elements import StreamlitFlowNode, StreamlitFlowEdge
 from streamlit_flow.layouts import ForceLayout
             
-nodes = [StreamlitFlowNode(id='1', pos=(0, 0), data={'label': 'Node 1'}, node_type='input', source_position='right'),
-        StreamlitFlowNode('2', (0, 0), {'label': 'Node 2'}, 'default', 'right', 'left'),
-        StreamlitFlowNode('3', (0, 0), {'label': 'Node 3'}, 'default', 'right', 'left'),
-        StreamlitFlowNode('4', (0, 0), {'label': 'Node 4'}, 'output', target_position='left'),
-        StreamlitFlowNode('5', (0, 0), {'label': 'Node 5'}, 'output', target_position='left'),
-        StreamlitFlowNode('6', (0, 0), {'label': 'Node 6'}, 'output', target_position='left'),
-        StreamlitFlowNode('7', (0, 0), {'label': 'Node 7'}, 'output', target_position='left'),]
+nodes = [StreamlitFlowNode(id='1', pos=(0, 0), data={'content': 'Node 1'}, node_type='input', source_position='right'),
+        StreamlitFlowNode('2', (0, 0), {'content': 'Node 2'}, 'default', 'right', 'left'),
+        StreamlitFlowNode('3', (0, 0), {'content': 'Node 3'}, 'default', 'right', 'left'),
+        StreamlitFlowNode('4', (0, 0), {'content': 'Node 4'}, 'output', target_position='left'),
+        StreamlitFlowNode('5', (0, 0), {'content': 'Node 5'}, 'output', target_position='left'),
+        StreamlitFlowNode('6', (0, 0), {'content': 'Node 6'}, 'output', target_position='left'),
+        StreamlitFlowNode('7', (0, 0), {'content': 'Node 7'}, 'output', target_position='left'),]
         
 edges = [StreamlitFlowEdge('1-2', '1', '2', animated=True),
         StreamlitFlowEdge('1-3', '1', '3', animated=True),
@@ -179,13 +179,13 @@ from streamlit_flow import streamlit_flow
 from streamlit_flow.elements import StreamlitFlowNode, StreamlitFlowEdge
 from streamlit_flow.layouts import StressLayout
             
-nodes = [StreamlitFlowNode(id='1', pos=(0, 0), data={'label': 'Node 1'}, node_type='input', source_position='right'),
-        StreamlitFlowNode('2', (0, 0), {'label': 'Node 2'}, 'default', 'right', 'left'),
-        StreamlitFlowNode('3', (0, 0), {'label': 'Node 3'}, 'default', 'right', 'left'),
-        StreamlitFlowNode('4', (0, 0), {'label': 'Node 4'}, 'output', target_position='left'),
-        StreamlitFlowNode('5', (0, 0), {'label': 'Node 5'}, 'output', target_position='left'),
-        StreamlitFlowNode('6', (0, 0), {'label': 'Node 6'}, 'output', target_position='left'),
-        StreamlitFlowNode('7', (0, 0), {'label': 'Node 7'}, 'output', target_position='left'),]
+nodes = [StreamlitFlowNode(id='1', pos=(0, 0), data={'content': 'Node 1'}, node_type='input', source_position='right'),
+        StreamlitFlowNode('2', (0, 0), {'content': 'Node 2'}, 'default', 'right', 'left'),
+        StreamlitFlowNode('3', (0, 0), {'content': 'Node 3'}, 'default', 'right', 'left'),
+        StreamlitFlowNode('4', (0, 0), {'content': 'Node 4'}, 'output', target_position='left'),
+        StreamlitFlowNode('5', (0, 0), {'content': 'Node 5'}, 'output', target_position='left'),
+        StreamlitFlowNode('6', (0, 0), {'content': 'Node 6'}, 'output', target_position='left'),
+        StreamlitFlowNode('7', (0, 0), {'content': 'Node 7'}, 'output', target_position='left'),]
         
 edges = [StreamlitFlowEdge('1-2', '1', '2', animated=True),
         StreamlitFlowEdge('1-3', '1', '3', animated=True),
@@ -214,13 +214,13 @@ from streamlit_flow import streamlit_flow
 from streamlit_flow.elements import StreamlitFlowNode, StreamlitFlowEdge
 from streamlit_flow.layouts import RandomLayout
             
-nodes = [StreamlitFlowNode(id='1', pos=(0, 0), data={'label': 'Node 1'}, node_type='input', source_position='right'),
-        StreamlitFlowNode('2', (0, 0), {'label': 'Node 2'}, 'default', 'right', 'left'),
-        StreamlitFlowNode('3', (0, 0), {'label': 'Node 3'}, 'default', 'right', 'left'),
-        StreamlitFlowNode('4', (0, 0), {'label': 'Node 4'}, 'output', target_position='left'),
-        StreamlitFlowNode('5', (0, 0), {'label': 'Node 5'}, 'output', target_position='left'),
-        StreamlitFlowNode('6', (0, 0), {'label': 'Node 6'}, 'output', target_position='left'),
-        StreamlitFlowNode('7', (0, 0), {'label': 'Node 7'}, 'output', target_position='left'),]
+nodes = [StreamlitFlowNode(id='1', pos=(0, 0), data={'content': 'Node 1'}, node_type='input', source_position='right'),
+        StreamlitFlowNode('2', (0, 0), {'content': 'Node 2'}, 'default', 'right', 'left'),
+        StreamlitFlowNode('3', (0, 0), {'content': 'Node 3'}, 'default', 'right', 'left'),
+        StreamlitFlowNode('4', (0, 0), {'content': 'Node 4'}, 'output', target_position='left'),
+        StreamlitFlowNode('5', (0, 0), {'content': 'Node 5'}, 'output', target_position='left'),
+        StreamlitFlowNode('6', (0, 0), {'content': 'Node 6'}, 'output', target_position='left'),
+        StreamlitFlowNode('7', (0, 0), {'content': 'Node 7'}, 'output', target_position='left'),]
         
 edges = [StreamlitFlowEdge('1-2', '1', '2', animated=True),
         StreamlitFlowEdge('1-3', '1', '3', animated=True),
@@ -248,13 +248,13 @@ from streamlit_flow import streamlit_flow
 from streamlit_flow.elements import StreamlitFlowNode, StreamlitFlowEdge
 from streamlit_flow.layouts import ManualLayout
             
-nodes = [StreamlitFlowNode(id='1', pos=(0, 0), data={'label': 'Node 1'}, node_type='input', source_position='right'),
-        StreamlitFlowNode('2', (0, 0), {'label': 'Node 2'}, 'default', 'right', 'left'),
-        StreamlitFlowNode('3', (0, 0), {'label': 'Node 3'}, 'default', 'right', 'left'),
-        StreamlitFlowNode('4', (0, 0), {'label': 'Node 4'}, 'output', target_position='left'),
-        StreamlitFlowNode('5', (0, 0), {'label': 'Node 5'}, 'output', target_position='left'),
-        StreamlitFlowNode('6', (0, 0), {'label': 'Node 6'}, 'output', target_position='left'),
-        StreamlitFlowNode('7', (0, 0), {'label': 'Node 7'}, 'output', target_position='left'),]
+nodes = [StreamlitFlowNode(id='1', pos=(0, 0), data={'content': 'Node 1'}, node_type='input', source_position='right'),
+        StreamlitFlowNode('2', (0, 0), {'content': 'Node 2'}, 'default', 'right', 'left'),
+        StreamlitFlowNode('3', (0, 0), {'content': 'Node 3'}, 'default', 'right', 'left'),
+        StreamlitFlowNode('4', (0, 0), {'content': 'Node 4'}, 'output', target_position='left'),
+        StreamlitFlowNode('5', (0, 0), {'content': 'Node 5'}, 'output', target_position='left'),
+        StreamlitFlowNode('6', (0, 0), {'content': 'Node 6'}, 'output', target_position='left'),
+        StreamlitFlowNode('7', (0, 0), {'content': 'Node 7'}, 'output', target_position='left'),]
         
 edges = [StreamlitFlowEdge('1-2', '1', '2', animated=True),
         StreamlitFlowEdge('1-3', '1', '3', animated=True),

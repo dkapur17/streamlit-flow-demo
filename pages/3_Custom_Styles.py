@@ -13,18 +13,17 @@ so `background-color` becomes `backgroundColor`. Here's an example of how to man
 
 
 
-nodes = [StreamlitFlowNode('1', (100, 100), {'label': 'Green Node'}, 'input', 'right', draggable=False, style={'color': 'white', 'backgroundColor': '#00c04b', 'border': '2px solid white'}),
-        StreamlitFlowNode('2', (300, 25), {'label': 'Smol Node'}, 'output', 'right', 'left', draggable=False, style={'width': '50px', 'height': '40px', 'fontSize': '8px'}),
-        StreamlitFlowNode('3', (300, 175), {'label': 'Regular Node'}, 'output', 'right', 'left', draggable=False)]
+nodes = [StreamlitFlowNode('1', (100, 100), {'content': 'Green Node'}, 'input', 'right', draggable=False, style={'color': 'white', 'backgroundColor': '#00c04b', 'border': '2px solid white'}),
+        StreamlitFlowNode('2', (350, 25), {'content': 'Smol Node'}, 'output', 'right', 'left', draggable=False, style={'fontSize': '8px', 'padding': 0}, width=50, height=40),
+        StreamlitFlowNode('3', (350, 175), {'content': 'Regular Node'}, 'output', 'right', 'left', draggable=False)]
 
 edges = [StreamlitFlowEdge('1-2', '1', '2', animated=True, 
-                            label="edge", 
-                            label_show_bg=True, 
-                            label_bg_style={'stroke': 'red', 'fill': 'gray'}
-                            ),
+                                label="edge", 
+                                label_show_bg=True, 
+                                label_bg_style={'stroke': 'red', 'fill': 'gray'}),
         StreamlitFlowEdge('1-3', '1', '3', animated=True)]
 
-streamlit_flow('static_flow',
+streamlit_flow('custom_style_flow',
                 nodes,
                 edges,
                 fit_view=True,
@@ -36,21 +35,20 @@ streamlit_flow('static_flow',
 st.divider()
 
 with st.expander("Spolier"):
-    st.code("""
+        st.code("""
 from streamlit_flow import streamlit_flow
 from streamlit_flow.elements import StreamlitFlowNode, StreamlitFlowEdge
         
-nodes = [StreamlitFlowNode('1', (100, 100), {'label': 'Green Node'}, 'input', 'right', draggable=False, 
-                            style={'color': 'white', 'backgroundColor': '#00c04b', 'border': '2px solid white'}),
-        StreamlitFlowNode('2', (300, 25), {'label': 'Smol Node'}, 'output', 'right', 'left', draggable=False, 
-                            style={'width': '50px', 'height': '40px', 'fontSize': '8px'}),
-        StreamlitFlowNode('3', (300, 175), {'label': 'Regular Node'}, 'output', 'right', 'left', draggable=False)]
+nodes = [StreamlitFlowNode('1', (100, 100), {'content': 'Green Node'}, 'input', 'right', draggable=False, 
+                        style={'color': 'white', 'backgroundColor': '#00c04b', 'border': '2px solid white'}),
+        StreamlitFlowNode('2', (300, 25), {'content': 'Smol Node'}, 'output', 'right', 'left', draggable=False, 
+                        style={'width': '50px', 'height': '40px', 'fontSize': '8px'}),
+        StreamlitFlowNode('3', (300, 175), {'content': 'Regular Node'}, 'output', 'right', 'left', draggable=False)]
 
 edges = [StreamlitFlowEdge('1-2', '1', '2', animated=True, 
-                            label="edge", 
-                            label_show_bg=True, 
-                            label_bg_style={'stroke': 'red', 'fill': 'gray'}
-                            ),
+                                label="edge", 
+                                label_show_bg=True, 
+                                label_bg_style={'stroke': 'red', 'fill': 'gray'}),
         StreamlitFlowEdge('1-3', '1', '3', animated=True)]
 
 streamlit_flow('static_flow',

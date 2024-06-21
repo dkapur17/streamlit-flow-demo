@@ -24,7 +24,7 @@ streamlit_flow(st.session_state['flow_key'],
                 allow_new_edges=True)
 
 if st.button("Add Node"):
-    new_node = StreamlitFlowNode(id=str(len(st.session_state['nodes']) + 1), pos=(100, 100), data={'label': f'Node {len(st.session_state["nodes"]) + 1}'}, connectable=True)
+    new_node = StreamlitFlowNode(id=str(len(st.session_state['nodes']) + 1), pos=(100, 100), data={'content': f'Node {len(st.session_state["nodes"]) + 1}'}, connectable=True)
     flow_key = st.session_state['flow_key']
     if flow_key in st.session_state and flow_key:
         new_nodes = [StreamlitFlowNode.from_dict(node) for node in st.session_state[flow_key]['nodes']]
@@ -57,7 +57,7 @@ streamlit_flow(st.session_state['flow_key'],
                 allow_new_edges=True)
 
 if st.button("Add Node"):
-    new_node = StreamlitFlowNode(id=str(len(st.session_state['nodes']) + 1), pos=(100, 100), data={'label': f'Node {len(st.session_state["nodes"]) + 1}'}, connectable=True)
+    new_node = StreamlitFlowNode(id=str(len(st.session_state['nodes']) + 1), pos=(100, 100), data={'content': f'Node {len(st.session_state["nodes"]) + 1}'}, connectable=True)
     flow_key = st.session_state['flow_key']
     if flow_key in st.session_state and flow_key:
         new_nodes = [StreamlitFlowNode.from_dict(node) for node in st.session_state[flow_key]['nodes']]

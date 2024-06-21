@@ -38,7 +38,8 @@ st.code("""streamlit_flow(
     allow_zoom:bool=True,
     enable_pane_menu:bool=False,
     enable_node_menu:bool=False,
-    enable_edge_menu:bool=False
+    enable_edge_menu:bool=False,
+    hide_watermark:bool=False
 )""")
 
 st.divider()
@@ -75,7 +76,6 @@ with col1:
 
     st.markdown("""* `node_type` must be one of `"input"`, `"default"` or `"output"`
 * `source_position` and `target_position` must be one of `"top"`, `"bottom"`, `"left"` or `"right"`
-* `width` and `height` are values that are used for computing the node positions in the layout. They don't change the node visually. If you wish to change node dimension, use the `style` attribute.
 * `style` is a CSS style dictionary. Eg. `{"backgroundColor": "green", "fontWeight": 900}`
 * `**kwargs` can be any other attribute on a React Flow node that you wish to manually set (not recommended).
 """)
