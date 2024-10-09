@@ -2,6 +2,7 @@ from typing import Dict
 import streamlit as st
 from streamlit_flow import streamlit_flow
 from streamlit_flow.elements import StreamlitFlowNode, StreamlitFlowEdge
+from streamlit_flow.state import StreamlitFlowState
 from streamlit_flow.layouts import *
 
 st.set_page_config(page_title="Layouts - Streamlit Flow", layout="wide")
@@ -22,6 +23,8 @@ edges = [StreamlitFlowEdge('1-2', '1', '2', animated=True),
         StreamlitFlowEdge('3-7', '3', '7', animated=True),
         ]
 
+state = StreamlitFlowState(nodes, edges)
+
 st.title("Layouts")
 
 st.markdown("Streamlit flow provides easy to use layouts to automatically arrange the nodes in the flow diagram.")
@@ -32,13 +35,14 @@ st.markdown("Tree-based algorithm provided by the Eclipse Layout Kernel. Compute
 st.link_button("Read More", "https://eclipse.dev/elk/reference/algorithms/org-eclipse-elk-mrtree.html")
 col1, col2 = st.columns(2)
 with col1:
-    streamlit_flow('tree_layout', nodes, edges, layout=TreeLayout(direction='right'), fit_view=True)
+    streamlit_flow('tree_layout', state, layout=TreeLayout(direction='right'), fit_view=True)
 
 
 with col2:
     st.code("""
 from streamlit_flow import streamlit_flow
 from streamlit_flow.elements import StreamlitFlowNode, StreamlitFlowEdge 
+from streamlit_flow.state import StreamlitFlowState
 from streamlit_flow.layouts import TreeLayout
         
 nodes = [StreamlitFlowNode(id='1', pos=(0, 0), data={'content': 'Node 1'}, node_type='input', source_position='right'),
@@ -57,7 +61,9 @@ edges = [StreamlitFlowEdge('1-2', '1', '2', animated=True),
         StreamlitFlowEdge('3-7', '3', '7', animated=True),
         ]
 
-streamlit_flow('tree_layout', nodes, edges, layout=TreeLayout(direction='right'), fit_view=True)""")
+state = StreamlitFlowState(nodes, edges)
+
+streamlit_flow('tree_layout', state, layout=TreeLayout(direction='right'), fit_view=True)""")
     
 st.header("Layered Layout")
 
@@ -66,13 +72,14 @@ st.link_button("Read More", "https://eclipse.dev/elk/reference/algorithms/org-ec
 col1, col2 = st.columns(2)
 
 with col1:
-    streamlit_flow('layered_layout', nodes, edges, layout=LayeredLayout(direction='right'), fit_view=True)
+    streamlit_flow('layered_layout', state, layout=LayeredLayout(direction='right'), fit_view=True)
 
 
 with col2:
     st.code("""
 from streamlit_flow import streamlit_flow
 from streamlit_flow.elements import StreamlitFlowNode, StreamlitFlowEdge 
+from streamlit_flow.state import StreamlitFlowState
 from streamlit_flow.layouts import LayeredLayout
         
 nodes = [StreamlitFlowNode(id='1', pos=(0, 0), data={'content': 'Node 1'}, node_type='input', source_position='right'),
@@ -91,7 +98,9 @@ edges = [StreamlitFlowEdge('1-2', '1', '2', animated=True),
         StreamlitFlowEdge('3-7', '3', '7', animated=True),
         ]
 
-streamlit_flow('tree_layout', nodes, edges, layout=LayeredLayout(direction='right'), fit_view=True)""")
+state = StreamlitFlowState(nodes, edges)
+
+streamlit_flow('tree_layout', state, layout=LayeredLayout(direction='right'), fit_view=True)""")
     
 st.header("Radial Layout")
 
@@ -101,13 +110,14 @@ st.link_button("Read More", "https://eclipse.dev/elk/reference/algorithms/org-ec
 col1, col2 = st.columns(2)
 
 with col1:
-    streamlit_flow('radial_layout', nodes, edges, layout=RadialLayout(), fit_view=True)
+    streamlit_flow('radial_layout', state, layout=RadialLayout(), fit_view=True)
 
 
 with col2:
     st.code("""
 from streamlit_flow import streamlit_flow
 from streamlit_flow.elements import StreamlitFlowNode, StreamlitFlowEdge
+from streamlit_flow.state import StreamlitFlowState
 from streamlit_flow.layouts import RadialLayout
             
 nodes = [StreamlitFlowNode(id='1', pos=(0, 0), data={'content': 'Node 1'}, node_type='input', source_position='right'),
@@ -125,8 +135,10 @@ edges = [StreamlitFlowEdge('1-2', '1', '2', animated=True),
         StreamlitFlowEdge('3-6', '3', '6', animated=True),
         StreamlitFlowEdge('3-7', '3', '7', animated=True),
         ]
+
+state = StreamlitFlowState(nodes, edges)
             
-streamlit_flow('radial_layout', nodes, edges, layout=RadialLayout(), fit_view=True)""")
+streamlit_flow('radial_layout', state, layout=RadialLayout(), fit_view=True)""")
 
 
 st.header("Force Layout")
@@ -136,13 +148,14 @@ st.link_button("Read More", "https://eclipse.dev/elk/reference/algorithms/org-ec
 col1, col2 = st.columns(2)
 
 with col1:
-    streamlit_flow('force_layout', nodes, edges, layout=ForceLayout(), fit_view=True)
+    streamlit_flow('force_layout', state, layout=ForceLayout(), fit_view=True)
 
 
 with col2:
     st.code("""
 from streamlit_flow import streamlit_flow
 from streamlit_flow.elements import StreamlitFlowNode, StreamlitFlowEdge
+from streamlit_flow.state import StreamlitFlowState
 from streamlit_flow.layouts import ForceLayout
             
 nodes = [StreamlitFlowNode(id='1', pos=(0, 0), data={'content': 'Node 1'}, node_type='input', source_position='right'),
@@ -160,8 +173,10 @@ edges = [StreamlitFlowEdge('1-2', '1', '2', animated=True),
         StreamlitFlowEdge('3-6', '3', '6', animated=True),
         StreamlitFlowEdge('3-7', '3', '7', animated=True),
         ]
+
+state = StreamlitFlowState(nodes, edges)
             
-streamlit_flow('radial_layout', nodes, edges, layout=ForceLayout(), fit_view=True)""")
+streamlit_flow('radial_layout', state, layout=ForceLayout(), fit_view=True)""")
     
 st.header("Stress Layout")
 
@@ -171,12 +186,13 @@ st.link_button("Read More", "https://eclipse.dev/elk/reference/algorithms/org-ec
 col1, col2 = st.columns(2)
 
 with col1:
-    streamlit_flow('stress_layout', nodes, edges, layout=StressLayout(), fit_view=True)
+    streamlit_flow('stress_layout', state, layout=StressLayout(), fit_view=True)
 
 with col2:
     st.code("""
 from streamlit_flow import streamlit_flow
 from streamlit_flow.elements import StreamlitFlowNode, StreamlitFlowEdge
+from streamlit_flow.state import StreamlitFlowState
 from streamlit_flow.layouts import StressLayout
             
 nodes = [StreamlitFlowNode(id='1', pos=(0, 0), data={'content': 'Node 1'}, node_type='input', source_position='right'),
@@ -194,8 +210,10 @@ edges = [StreamlitFlowEdge('1-2', '1', '2', animated=True),
         StreamlitFlowEdge('3-6', '3', '6', animated=True),
         StreamlitFlowEdge('3-7', '3', '7', animated=True),
         ]
+
+state = StreamlitFlowState(nodes, edges)
             
-streamlit_flow('radial_layout', nodes, edges, layout=StressLayout(), fit_view=True)""")
+streamlit_flow('radial_layout', state, layout=StressLayout(), fit_view=True)""")
     
 
 st.header("Random Layout")
@@ -206,12 +224,13 @@ st.link_button("Read More", "https://eclipse.dev/elk/reference/algorithms/org-ec
 col1, col2 = st.columns(2)
 
 with col1:
-    streamlit_flow('random_layout', nodes, edges, layout=RandomLayout(), fit_view=True)
+    streamlit_flow('random_layout', state, layout=RandomLayout(), fit_view=True)
 
 with col2:
     st.code("""
 from streamlit_flow import streamlit_flow
 from streamlit_flow.elements import StreamlitFlowNode, StreamlitFlowEdge
+from streamlit_flow.state import StreamlitFlowState
 from streamlit_flow.layouts import RandomLayout
             
 nodes = [StreamlitFlowNode(id='1', pos=(0, 0), data={'content': 'Node 1'}, node_type='input', source_position='right'),
@@ -229,6 +248,8 @@ edges = [StreamlitFlowEdge('1-2', '1', '2', animated=True),
         StreamlitFlowEdge('3-6', '3', '6', animated=True),
         StreamlitFlowEdge('3-7', '3', '7', animated=True),
         ]
+
+state = StreamlitFlowState(nodes, edges)
             
 streamlit_flow('radial_layout', nodes, edges, layout=RandomLayout(), fit_view=True)""")
     
@@ -240,12 +261,13 @@ st.markdown("Keeps the current layout as it is, provided in the nodes, without a
 col1, col2 = st.columns(2)
 
 with col1:
-    streamlit_flow('manual_layout', nodes, edges, layout=ManualLayout(), fit_view=True)
+    streamlit_flow('manual_layout', state, layout=ManualLayout(), fit_view=True)
 
 with col2:
     st.code("""
 from streamlit_flow import streamlit_flow
 from streamlit_flow.elements import StreamlitFlowNode, StreamlitFlowEdge
+from streamlit_flow.state import StreamlitFlowState
 from streamlit_flow.layouts import ManualLayout
             
 nodes = [StreamlitFlowNode(id='1', pos=(0, 0), data={'content': 'Node 1'}, node_type='input', source_position='right'),
@@ -263,6 +285,8 @@ edges = [StreamlitFlowEdge('1-2', '1', '2', animated=True),
         StreamlitFlowEdge('3-6', '3', '6', animated=True),
         StreamlitFlowEdge('3-7', '3', '7', animated=True),
         ]
+
+state = StreamlitFlowState(nodes, edges)
             
 streamlit_flow('radial_layout', nodes, edges, layout=ManualLayout(), fit_view=True)""")
     

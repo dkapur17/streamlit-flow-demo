@@ -1,7 +1,4 @@
 import streamlit as st
-from streamlit_flow import streamlit_flow
-from streamlit_flow.elements import StreamlitFlowNode, StreamlitFlowEdge
-
 
 st.set_page_config(page_title="Static Flow Demo - Streamlit Flow", layout="wide")
 
@@ -11,49 +8,50 @@ This means the viewport can be adjusted and the nodes can be moved around, but n
 If you choose to, you can even disable the ability to move the nodes around or adjust the viewport. Below is an example of a fully static flow diagram.""")
 
 
+with st.echo("below"):
 
-nodes = [StreamlitFlowNode(id='1', pos=(100, 100), data={'content': 'Node 1'}, node_type='input', source_position='right', draggable=False),
-        StreamlitFlowNode('2', (350, 50), {'content': 'Node 2'}, 'default', 'right', 'left', draggable=False),
-        StreamlitFlowNode('3', (350, 150), {'content': 'Node 3'}, 'default', 'right', 'left', draggable=False),
-        StreamlitFlowNode('4', (600, 100), {'content': 'Node 4'}, 'output', target_position='left', draggable=False)]
+    from streamlit_flow import streamlit_flow
+    from streamlit_flow.elements import StreamlitFlowNode, StreamlitFlowEdge
+    from streamlit_flow.state import StreamlitFlowState
 
-edges = [StreamlitFlowEdge('1-2', '1', '2', animated=True),
-        StreamlitFlowEdge('1-3', '1', '3', animated=True),
-        StreamlitFlowEdge('2-4', '2', '4', animated=True),
-        StreamlitFlowEdge('3-4', '3', '4', animated=True)]
+    nodes = [StreamlitFlowNode( id='1', 
+                                pos=(100, 100), 
+                                data={'content': 'Node 1'}, 
+                                node_type='input', 
+                                source_position='right', 
+                                draggable=False),
+            StreamlitFlowNode(  '2',
+                                (350, 50), 
+                                {'content': 'Node 2'}, 
+                                'default', 
+                                'right', 
+                                'left', 
+                                draggable=False),
+            StreamlitFlowNode(  '3', 
+                                (350, 150), 
+                                {'content': 'Node 3'}, 
+                                'default', 
+                                'right', 
+                                'left', 
+                                draggable=False),
+            StreamlitFlowNode(  '4', 
+                                (600, 100), 
+                                {'content': 'Node 4'}, 
+                                'output', 
+                                target_position='left', 
+                                draggable=False)]
 
-streamlit_flow('static_flow',
-                nodes,
-                edges,
-                fit_view=True,
-                show_minimap=False,
-                show_controls=False,
-                pan_on_drag=False,
-                allow_zoom=False)
+    edges = [StreamlitFlowEdge('1-2', '1', '2', animated=True, marker_end={'type': 'arrow'}),
+            StreamlitFlowEdge('1-3', '1', '3', animated=True, marker_end={'type': 'arrow'}),
+            StreamlitFlowEdge('2-4', '2', '4', animated=True, marker_end={'type': 'arrow'}),
+            StreamlitFlowEdge('3-4', '3', '4', animated=True, marker_end={'type': 'arrow'})]
 
-st.divider()
+    state = StreamlitFlowState(nodes, edges)
 
-with st.expander("Spolier"):
-    st.code("""
-from streamlit_flow import streamlit_flow
-from streamlit_flow.elements import StreamlitFlowNode, StreamlitFlowEdge
-        
-nodes = [StreamlitFlowNode(id='1', pos=(100, 100), data={'content': 'Node 1'}, node_type='input', source_position='right', draggable=False),
-        StreamlitFlowNode('2', (350, 50), {'content': 'Node 2'}, 'default', 'right', 'left', draggable=False),
-        StreamlitFlowNode('3', (350, 150), {'content': 'Node 3'}, 'default', 'right', 'left', draggable=False),
-        StreamlitFlowNode('4', (600, 100), {'content': 'Node 4'}, 'output', target_position='left', draggable=False)]
-
-edges = [StreamlitFlowEdge('1-2', '1', '2', animated=True),
-        StreamlitFlowEdge('1-3', '1', '3', animated=True),
-        StreamlitFlowEdge('2-4', '2', '4', animated=True),
-        StreamlitFlowEdge('3-4', '3', '4', animated=True)]
-
-streamlit_flow('static_flow',
-                nodes,
-                edges,
-                fit_view=True,
-                show_minimap=False,
-                show_controls=False,
-                pan_on_drag=False,
-                allow_zoom=False)
-""")
+    streamlit_flow('static_flow',
+                    state,
+                    fit_view=True,
+                    show_minimap=False,
+                    show_controls=False,
+                    pan_on_drag=False,
+                    allow_zoom=False)

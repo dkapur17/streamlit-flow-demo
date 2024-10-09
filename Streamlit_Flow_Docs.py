@@ -13,8 +13,9 @@ st.code("pip install streamlit-flow-component", 'bash')
 
 st.markdown("# Usage")
 
-st.markdown("There are three main components in Streamlit Flow:")
+st.markdown("There are four main components in Streamlit Flow:")
 st.markdown("The component itself: `streamlit_flow`")
+st.markdown("The component state: `StreamlitFlowState`")
 st.markdown("The flow elements: `StreamlitFlowNode` and `StreamlitFlowEdge`")
 st.markdown("The layouts: `ManualLayout`, `LayeredLayout`, `TreeLayout`, `RadialLayout`, `ForceLayout`, `StressLayout`, `RandomLayout`")
 
@@ -22,9 +23,8 @@ st.markdown("## Streamlit Flow Component")
 st.markdown("The Streamlit Flow component is the main component that is used to render the flow diagram.")
 st.code("""streamlit_flow(
     key:str,
-    init_nodes:List[StreamlitFlowNode], 
-    init_edges:List[StreamlitFlowEdge], 
-    height:int=500, 
+    state:StreamlitFlowState,
+    height:int=500,
     fit_view:bool=False,
     show_controls:bool=True,
     show_minimap:bool=False,
@@ -36,6 +36,7 @@ st.code("""streamlit_flow(
     get_edge_on_click:bool=False,
     pan_on_drag:bool=True,
     allow_zoom:bool=True,
+    min_zoom:float=0.5,
     enable_pane_menu:bool=False,
     enable_node_menu:bool=False,
     enable_edge_menu:bool=False,
@@ -43,6 +44,21 @@ st.code("""streamlit_flow(
 )""")
 
 st.divider()
+
+st.markdown("## Streamlit Flow State")
+st.markdown("The Streamlit Flow State maintains the state of the flow diagram and makes sure the UI and streamlit are in sync.")
+
+st.code("""StreamlitFlowState(
+    nodes:List[StreamlitFlowNode],
+    edges:List[StreamlitFlowEdge],
+    selected_id:str=None,
+    timestamp:float=0.0
+)""")
+
+st.warning("Do not explicitly set `selected_id` or `timestamp` as they are used internally by the component.")
+
+st.divider()
+
 st.markdown("## Streamlit Flow Elements")
 st.markdown("The Streamlit Flow elements are the nodes and edges that are used to create the flow diagram. Each has its own interface as described below.")
 
@@ -52,12 +68,12 @@ col1, col2 = st.columns(2)
 with col1:
     st.markdown("### Streamlit Flow Node")
     st.code("""StreamlitFlowNode(
-    id:str, 
+    id:str,
     pos: Tuple[float, float],
     data:Dict[str, any],
-    node_type:str="default",
-    source_position:str='bottom',
-    target_position:str='top',
+    node_type:Literal['default', 'input', 'output'] = 'default',
+    source_position:Literal['bottom', 'top', 'left', 'right'] = 'bottom',
+    target_position:Literal['bottom', 'top', 'left', 'right'] = 'top',
     hidden:bool=False,
     selected:bool=False,
     dragging:bool=False,
@@ -66,17 +82,13 @@ with col1:
     connectable:bool=False,
     resizing:bool=False,
     deletable:bool=False,
-    width:Union[float, None]=None,
-    height:Union[float, None]=None,
     z_index:float=0,
     focusable:bool=True,
     style:Dict[str, any]={},
     **kwargs
 )""")
 
-    st.markdown("""* `node_type` must be one of `"input"`, `"default"` or `"output"`
-* `source_position` and `target_position` must be one of `"top"`, `"bottom"`, `"left"` or `"right"`
-* `style` is a CSS style dictionary. Eg. `{"backgroundColor": "green", "fontWeight": 900}`
+    st.markdown("""* `style` is a CSS style dictionary. Eg. `{"backgroundColor": "green", "fontWeight": 900}`
 * `**kwargs` can be any other attribute on a React Flow node that you wish to manually set (not recommended).
 """)
 
@@ -86,7 +98,9 @@ with col2:
     id:str,
     source:str,
     target:str,
-    edge_type:str="default",
+    edge_type:Literal['default', 'straight', 'step', "smoothstep", "simplebezier"]="default",
+    marker_start:dict={},
+    marker_end:dict={},
     hidden:bool=False,
     animated:bool=False,
     selected:bool=False,
@@ -97,11 +111,11 @@ with col2:
     label_style:Dict[str, any]={},
     label_show_bg:bool=False,
     label_bg_style:Dict[str, any]={},
-    style:Dict[str, any]={},
+    style:Dict[str, any]={}
     **kwargs
 )""")
 
-    st.markdown("""* `edge_type` must be one of `"default"`, `"straight"`, `"step"`, `"smoothstep"` or `"simplebezier"`
+    st.markdown("""* `marker_start` and `marker_end` are dictionaries that can be used to style the start and end markers of the edge. Refer to the [React Flow documentation](https://reactflow.dev/api-reference/types/edge-marker) for more information.`
 * `label_style`, `label_bg_style` and `style` are all a CSS style dictionaries. Eg. `{"backgroundColor": "green", "fontWeight": 900}`
 * `**kwargs` can be any other attribute on a React Flow node that you wish to manually set (not recommended).
 """)
@@ -122,9 +136,7 @@ with tree_col:
     st.markdown("### Tree Layout")
     st.markdown("Arranges the nodes in a tree structure.")
     st.code("""TreeLayout(
-    direction:str, 
-    horizontal_spacing:float=150, 
-    vertical_spacing:float=75, 
+    direction:Literal['up', 'down', 'left', 'right'], 
     node_node_spacing:float=75
 )""")
 
@@ -132,9 +144,7 @@ with layered_col:
     st.markdown("### Layered Layout")
     st.markdown("Arranges the nodes in layers.")
     st.code("""LayeredLayout(
-    direction:str, 
-    horizontal_spacing:float=150, 
-    vertical_spacing:float=75, 
+    direction:Literal['up', 'down', 'left', 'right'], 
     node_node_spacing:float=75, 
     node_layer_spacing:float=75
 )""")
@@ -145,8 +155,6 @@ with radial_col:
     st.markdown("### Radial Layout")
     st.markdown("Arranges the nodes radially.")
     st.code("""RadialLayout(
-    horizontal_spacing:float=150,
-    vertical_spacing:float=75,
     node_node_spacing:float=75
 )""")
 
@@ -154,8 +162,6 @@ with col4:
     st.markdown("### Force Layout")
     st.markdown("Uses a force directed layout.")
     st.code("""ForceLayout(
-    horizontal_spacing:float=150,
-    vertical_spacing:float=75,
     node_node_spacing:float=75
 )""")
     
@@ -163,8 +169,6 @@ with col5:
     st.markdown("### Stress Layout")
     st.markdown("Uses a stress layout.")
     st.code("""StressLayout(
-    horizontal_spacing:float=150,
-    vertical_spacing:float=75,
     node_node_spacing:float=75
 )""")
 
@@ -172,8 +176,6 @@ with col6:
     st.markdown("### Random Layout")
     st.markdown("Arranges the nodes randomly.")
     st.code("""RandomLayout(
-    horizontal_spacing:float=150,
-    vertical_spacing:float=75,
     node_node_spacing:float=75
 )""")
 
@@ -187,15 +189,11 @@ from streamlit.layouts import Layout
     
 class CustomLayout(Layout):
 
-    def __init__(self, horizontal_spacing:float=150, vertical_spacing:float=75, elkOptions:Dict[str, Union[str, int]]) -> None:
-        self.horizontal_spacing = horizontal_spacing
-        self.vertical_spacing = vertical_spacing
+    def __init__(self, elkOptions:Dict[str, Union[str, int]]) -> None:
         self.elkOptions = elkOptions
 
     def __to_dict__(self) -> Dict[str, any]:
         return {
-            "defaultWidth": self.horizontal_spacing,
-            "defaultHeight": self.vertical_spacing,
             "elkOptions": self.elkOptions
         }
     
