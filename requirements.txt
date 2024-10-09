@@ -1,2 +1,2 @@
 streamlit
-streamlit-flow-component==1.2.8
+streamlit-flow-component==1.5.0
