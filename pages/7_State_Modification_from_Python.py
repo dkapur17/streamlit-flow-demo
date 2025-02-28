@@ -7,9 +7,12 @@ st.set_page_config(page_title="State Modification from Python - Streamlit Flow",
 
 st.title("State Modification from Python Demo")
 
+st.success("""`v1.6.0` fixes a known bug where the component doesn't update when a new state is passed to it. You can try this by clicking on the `Random Flow` button below.""")
+
 st.markdown("""Since `v1.5.0`, `streamlit_flow` allows for seamless state modification from python. This means that you can add, remove or update nodes and edges from the flow diagram without having to interact with the component itself. Below is an example of a flow diagram where nodes can be added dynamically.
 While doing this, you are still fully able to make modification to the flow diagram through the UI, such as creating/editing/moving nodes and edges.
 This new ability is brought to you by the new `StreamlitFlowState` class.""")
+
 
 st.info("It's important to note here that you'll need to maintain the state of the flow in `session_state` to make it persist across reruns. Also notice that the same state is passed as an argument to the component, and is then updated by the return value of the component.")
 
@@ -20,9 +23,12 @@ with st.echo('below'):
     from streamlit_flow import streamlit_flow
     from streamlit_flow.elements import StreamlitFlowNode, StreamlitFlowEdge
     from streamlit_flow.state import StreamlitFlowState
-    from streamlit_flow.layouts import TreeLayout
+    from streamlit_flow.layouts import TreeLayout, RadialLayout
     import random
     from uuid import uuid4
+
+
+    st.title("Streamlit Flow Example")
 
 
     if 'curr_state' not in st.session_state:
@@ -31,13 +37,13 @@ with st.echo('below'):
                 StreamlitFlowNode("3", (2, 0), {'content': 'Node 3'}, 'default', 'right', 'left'),
                 ]
 
-        edges = [StreamlitFlowEdge("1-2", "1", "2", animated=True),
+        edges = [StreamlitFlowEdge("1-2", "1", "2", animated=True, marker_start={}, marker_end={'type': 'arrow'}),
                 StreamlitFlowEdge("1-3", "1", "3", animated=True),
                 ]
         
         st.session_state.curr_state = StreamlitFlowState(nodes, edges)
 
-    col1, col2, col3, col4 = st.columns(4)
+    col1, col2, col3, col4, col5 = st.columns(5)
 
     with col1:
         if st.button("Add node"):
@@ -56,10 +62,14 @@ with st.echo('below'):
     with col3:
         if st.button("Add Random Edge"):
             if len(st.session_state.curr_state.nodes) > 1:
-                source = random.choice(st.session_state.curr_state.nodes)
-                target = random.choice([node for node in st.session_state.curr_state.nodes if node.id != source.id])
+
+                source_candidates = [streamlit_node for streamlit_node in st.session_state.curr_state.nodes if streamlit_node.type in ['input', 'default']]
+                target_candidates = [streamlit_node for streamlit_node in st.session_state.curr_state.nodes if streamlit_node.type in ['default', 'output']]
+                source = random.choice(source_candidates)
+                target = random.choice(target_candidates)
                 new_edge = StreamlitFlowEdge(f"{source.id}-{target.id}", source.id, target.id, animated=True)
-                st.session_state.curr_state.edges.append(new_edge)
+                if not any(edge.id == new_edge.id for edge in st.session_state.curr_state.edges):
+                    st.session_state.curr_state.edges.append(new_edge)
                 st.rerun()
         
     with col4:
@@ -68,6 +78,23 @@ with st.echo('below'):
                 edge_to_delete = random.choice(st.session_state.curr_state.edges)
                 st.session_state.curr_state.edges = [edge for edge in st.session_state.curr_state.edges if edge.id != edge_to_delete.id]
                 st.rerun()
+
+    with col5:
+        if st.button("Random Flow"):
+            nodes = [StreamlitFlowNode(str(f"st-flow-node_{uuid4()}"), (0, 0), {'content': f'Node {i}'}, 'default', 'right', 'left') for i in range(5)]
+            edges = []
+            for _ in range(5):
+                source = random.choice(nodes)
+                target = random.choice(nodes)
+                if source.id != target.id:
+                    new_edge = StreamlitFlowEdge(f"{source.id}-{target.id}", source.id, target.id, animated=True)
+                    if not any(edge.id == new_edge.id for edge in edges):
+                        edges.append(new_edge)
+            st.session_state.curr_state = StreamlitFlowState(
+                nodes=nodes,
+                edges=edges
+            )
+            st.rerun()
 
 
     st.session_state.curr_state = streamlit_flow('example_flow', 
@@ -85,18 +112,16 @@ with st.echo('below'):
                                     allow_new_edges=True,
                                     min_zoom=0.1)
 
+
     col1, col2, col3 = st.columns(3)
 
     with col1:
-        st.subheader("Current Nodes")
         for node in st.session_state.curr_state.nodes:
             st.write(node)
 
     with col2:
-        st.subheader("Current Edges")
         for edge in st.session_state.curr_state.edges:
             st.write(edge)
 
     with col3:
-        st.subheader("Current Selected Element")
         st.write(st.session_state.curr_state.selected_id)

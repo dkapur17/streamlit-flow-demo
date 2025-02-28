@@ -3,7 +3,6 @@ import streamlit as st
 st.set_page_config(layout="wide", page_title="Streamlit Flow")
 
 
-
 st.title("Streamlit Flow")
 st.markdown("Streamlit Flow is a library for creating and visualizing flow diagrams in Streamlit. Powered by ReactFlow, Streamlit Flow provides an extensive wrapper over ReactFlow while also adding several quality of life features like Context Menus and a Layout Engine, all accessible through the simplicity of Streamlit.")
 
@@ -52,7 +51,7 @@ st.code("""StreamlitFlowState(
     nodes:List[StreamlitFlowNode],
     edges:List[StreamlitFlowEdge],
     selected_id:str=None,
-    timestamp:float=0.0
+    timestamp:int=field(default_factory=lambda: int(datetime.now().timestamp() * 1000))
 )""")
 
 st.warning("Do not explicitly set `selected_id` or `timestamp` as they are used internally by the component.")
