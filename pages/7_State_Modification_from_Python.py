@@ -7,7 +7,7 @@ st.set_page_config(page_title="State Modification from Python - Streamlit Flow",
 
 st.title("State Modification from Python Demo")
 
-st.success("""`v1.6.0` fixes a known bug where the component doesn't update when a new state is passed to it. You can try this by clicking on the `Random Flow` button below.""")
+st.success("""`v1.6.1` fixes a known bug where the component doesn't update when a new state is passed to it. You can try this by clicking on the `Random Flow` button below.""")
 
 st.markdown("""Since `v1.5.0`, `streamlit_flow` allows for seamless state modification from python. This means that you can add, remove or update nodes and edges from the flow diagram without having to interact with the component itself. Below is an example of a flow diagram where nodes can be added dynamically.
 While doing this, you are still fully able to make modification to the flow diagram through the UI, such as creating/editing/moving nodes and edges.
@@ -31,16 +31,16 @@ with st.echo('below'):
     st.title("Streamlit Flow Example")
 
 
-    if 'curr_state' not in st.session_state:
-        nodes = [StreamlitFlowNode("1", (0, 0), {'content': 'Node 1'}, 'input', 'right'),
-                StreamlitFlowNode("2", (1, 0), {'content': 'Node 2'}, 'default', 'right', 'left'),
-                StreamlitFlowNode("3", (2, 0), {'content': 'Node 3'}, 'default', 'right', 'left'),
-                ]
+    nodes = [StreamlitFlowNode("1", (0, 0), {'content': 'Node 1'}, 'input', 'right'),
+            StreamlitFlowNode("2", (1, 0), {'content': 'Node 2'}, 'default', 'right', 'left'),
+            StreamlitFlowNode("3", (2, 0), {'content': 'Node 3'}, 'default', 'right', 'left'),
+            ]
 
-        edges = [StreamlitFlowEdge("1-2", "1", "2", animated=True, marker_start={}, marker_end={'type': 'arrow'}),
-                StreamlitFlowEdge("1-3", "1", "3", animated=True),
-                ]
-        
+    edges = [StreamlitFlowEdge("1-2", "1", "2", animated=True, marker_start={}, marker_end={'type': 'arrow'}),
+            StreamlitFlowEdge("1-3", "1", "3", animated=True),
+            ]
+    
+    if 'curr_state' not in st.session_state:
         st.session_state.curr_state = StreamlitFlowState(nodes, edges)
 
     col1, col2, col3, col4, col5 = st.columns(5)

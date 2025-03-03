@@ -46,6 +46,7 @@ st.divider()
 
 st.markdown("## Streamlit Flow State")
 st.markdown("The Streamlit Flow State maintains the state of the flow diagram and makes sure the UI and streamlit are in sync.")
+st.warning("Since `v1.6.1`, `streamlit-flow` relies on a timestamp based method to synchronize the state between the frontend and the backend. As a result, you must always define the state in a way that it doesn't get updated on each re-run, or the component will go into an infinte loop due to the constantly refreshed timestamp at each re-run. For code examples, see any of the demos.")
 
 st.code("""StreamlitFlowState(
     nodes:List[StreamlitFlowNode],

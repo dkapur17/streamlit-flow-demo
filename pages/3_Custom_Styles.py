@@ -15,20 +15,20 @@ with st.echo('below'):
 	from streamlit_flow.elements import StreamlitFlowNode, StreamlitFlowEdge
 	from streamlit_flow.state import StreamlitFlowState
 
-
 	nodes = [StreamlitFlowNode('1', (100, 100), {'content': 'Green Node'}, 'input', 'right', draggable=False, style={'color': 'white', 'backgroundColor': '#00c04b', 'border': '2px solid white'}),
-			StreamlitFlowNode('2', (350, 25), {'content': 'Smol Node'}, 'output', 'right', 'left', draggable=False, style={'fontSize': '8px', 'padding': 0, 'width': '40px'}),
-			StreamlitFlowNode('3', (350, 175), {'content': 'Regular Node'}, 'output', 'right', 'left', draggable=False)]
+		StreamlitFlowNode('2', (350, 25), {'content': 'Smol Node'}, 'output', 'right', 'left', draggable=False, style={'fontSize': '8px', 'padding': 0, 'width': '40px'}),
+		StreamlitFlowNode('3', (350, 175), {'content': 'Regular Node'}, 'output', 'right', 'left', draggable=False)]
 
 	edges = [StreamlitFlowEdge('1-2', '1', '2', animated=True, label="edge", label_show_bg=True, label_bg_style={'stroke': 'red', 'fill': 'gray'}),
-			StreamlitFlowEdge('1-3', '1', '3', animated=True)]
+		StreamlitFlowEdge('1-3', '1', '3', animated=True)]
 	
-	state = StreamlitFlowState(nodes, edges)
+	if 'custom_styles_state' not in st.session_state:	
+		st.session_state.custom_styles_state = StreamlitFlowState(nodes, edges)
 
 	streamlit_flow('custom_style_flow',
-					state,
-					fit_view=True,
-					show_minimap=False,
-					show_controls=False,
-					pan_on_drag=False,
-					allow_zoom=False)
+			st.session_state.custom_styles_state,
+			fit_view=True,
+			show_minimap=False,
+			show_controls=False,
+			pan_on_drag=False,
+			allow_zoom=False)
