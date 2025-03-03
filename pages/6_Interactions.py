@@ -56,7 +56,7 @@ with st.echo('below'):
 		st.session_state.canvas_state = StreamlitFlowState([], [])
 		
 	st.session_state.canvas_state = streamlit_flow('fully_interactive_flow', 
-                    st.session_state.canvas_state, # Start with an empty state, or with some pre-initialized state
+                    st.session_state.canvas_state,
                     fit_view=True,
                     show_controls=True,
                     allow_new_edges=True,
